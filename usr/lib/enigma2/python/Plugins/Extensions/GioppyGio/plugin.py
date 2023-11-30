@@ -205,7 +205,7 @@ if os.path.exists(_Af)and os.path.exists(_Ae):
 					try:from Components.SystemInfo import BoxInfo;imageDev=' R'+BoxInfo.getItem('imagedevbuild');images_exec=str(image_exec)+imageDev
 					except Exception:pass
 				else:images_exec=str(image_exec)
-			elif mod_image==_AQ:images_exec='Cobralibero'
+			elif mod_image==_AQ:images_exec='COBRALIBEROSAT TEAM'
 def DownloadInfo(url):
 	try:
 		req=Request(url,_F,{_Ag:_Ah});context=ssl._create_unverified_context();response=urlopen(req,timeout=5,context=context)
