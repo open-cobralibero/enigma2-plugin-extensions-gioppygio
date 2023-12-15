@@ -97,11 +97,11 @@ def TransferBouquetTerrestrialFinal():
 			TrasfBouq.close();return _B
 	except:return _A
 def StartProcess(jLinkSat,jLinkDtt,Type,Personal):
-	P='/Settings/Temp/*';O='/Settings/enigma2/* /etc/enigma2';N='#NAME User - bouquets (Tv)\n';M='/usr/lib/enigma2/python/Plugins/Extensions/GioppyGio/Moduli/Settings/Select';L='/usr/lib/enigma2/python/Plugins/Extensions/GioppyGio/Moduli/Settings/SelectBack';K='/Settings/Temp/enigma2dtt/lamedb';J='userbouquet.favourites_gio.tv';I='userbouquet.favourites.tv';H='/Settings/enigma2';G='/etc/enigma2/lamedb';F='rm -rf ';E='cp ';D='---';C='mkdir ';B='/etc/enigma2/bouquets.tv';A='/Settings/SelectFolder'
+	U='/Settings/Temp/*';T='/Settings/Temp/enigma2/lamedb /etc/enigma2';S='/Settings/enigma2/* /etc/enigma2';R='#NAME User - bouquets (Tv)\n';Q='/usr/lib/enigma2/python/Plugins/Extensions/GioppyGio/Moduli/Settings/SelectBack';P='/Settings/Temp/enigma2dtt/lamedb';O='userbouquet.favourites_gio.tv';N='userbouquet.favourites.tv';M='/Settings/Temp/enigma2/lamedb2/lamedb';L='/Settings/enigma2';K='a';J='/usr/lib/enigma2/python/Plugins/Extensions/GioppyGio/Moduli/Settings/Select';I='/Settings/Temp/enigma2/lamedb';H='rm -rf ';G='cp ';F='---';E='/etc/enigma2/lamedb';D='/etc/enigma2/bouquets.tv';C='mkdir ';B='/Settings/SelectFolder';A='cp -rf '
 	def LamedbRestore():
 		C='end\n';B='/Settings/Temp/ServiceListNewLamedb';A='/Settings/Temp/TrasponderListNewLamedb'
 		try:
-			TrasponderListNewLamedb=open(Directory+A,_D);ServiceListNewLamedb=open(Directory+B,_D);inTransponder=_A;inService=_A;infile=open(G,_C)
+			TrasponderListNewLamedb=open(Directory+A,_D);ServiceListNewLamedb=open(Directory+B,_D);inTransponder=_A;inService=_A;infile=open(E,_C)
 			while 1:
 				line=infile.readline()
 				if not line:break
@@ -111,7 +111,7 @@ def StartProcess(jLinkSat,jLinkDtt,Type,Personal):
 				if line.find('end')==0:inTransponder=_A;inService=_A
 				if inTransponder:TrasponderListNewLamedb.write(line)
 				if inService:ServiceListNewLamedb.write(line)
-			TrasponderListNewLamedb.close();ServiceListNewLamedb.close();WritingLamedbFinal=open(G,_D);WritingLamedbFinal.write('eDVB services /4/\n');TrasponderListNewLamedb=open(Directory+A,_C).readlines()
+			TrasponderListNewLamedb.close();ServiceListNewLamedb.close();WritingLamedbFinal=open(E,_D);WritingLamedbFinal.write('eDVB services /4/\n');TrasponderListNewLamedb=open(Directory+A,_C).readlines()
 			for x in TrasponderListNewLamedb:WritingLamedbFinal.write(x)
 			try:
 				TrasponderListOldLamedb=open(Directory+_H,_C).readlines()
@@ -133,10 +133,10 @@ def StartProcess(jLinkSat,jLinkDtt,Type,Personal):
 			if os.path.exists(Directory+A):
 				os.system(C+Directory+D);image_zip=zipfile.ZipFile(Directory+A);image_zip.extractall(Directory+D)
 				if os.path.exists(Directory+E):old_favorites=Directory+E;new_favorites=Directory+'/Settings/Temp/settingdtt/userbouquet.favourites_gio.tv';os.rename(old_favorites,new_favorites)
-				if os.path.exists(Directory+B):f=open(Directory+B,_C);filedata=f.read();f.close();newdata=filedata.replace(I,J);f=open(Directory+B,_D);f.write(newdata);f.close()
+				if os.path.exists(Directory+B):f=open(Directory+B,_C);filedata=f.read();f.close();newdata=filedata.replace(N,O);f=open(Directory+B,_D);f.write(newdata);f.close()
 				os.system(C+Directory+F);dir_name=Directory+'/Settings/Temp/settingdtt/';destination=Directory+F
 				for filename in glob.glob(os.path.join(dir_name,'*')):shutil.copy(filename,destination)
-				if os.path.exists(Directory+K):return _B
+				if os.path.exists(Directory+P):return _B
 			return _A
 		except:return
 	def DownloadSettingAgg(jLinkSat,jLinkDtt):
@@ -150,91 +150,104 @@ def StartProcess(jLinkSat,jLinkDtt,Type,Personal):
 			if os.path.exists(Directory+A):
 				os.system(C+Directory+B);image_zip=zipfile.ZipFile(Directory+A);image_zip.extractall(Directory+B)
 				if os.path.exists(Directory+E):old_favorites=Directory+E;new_favorites=Directory+'/Settings/Temp/setting/userbouquet.favourites_gio.tv';os.rename(old_favorites,new_favorites)
-				if os.path.exists(Directory+D):f=open(Directory+D,_C);filedata=f.read();f.close();newdata=filedata.replace(I,J);f=open(Directory+D,_D);f.write(newdata);f.close()
+				if os.path.exists(Directory+D):f=open(Directory+D,_C);filedata=f.read();f.close();newdata=filedata.replace(N,O);f=open(Directory+D,_D);f.write(newdata);f.close()
 				os.system(C+Directory+'/Settings/Temp/enigma2');dir_name=Directory+B;destination=Directory+'/Settings/Temp/enigma2/'
 				for filename in glob.glob(os.path.join(dir_name,'*')):shutil.copy(filename,destination)
-				if os.path.exists(Directory+'/Settings/Temp/enigma2/lamedb')and conferma:return _B
+				if os.path.exists(Directory+I)and conferma:return _B
 			return _A
 		except:return
 	def SaveList(list):
-		jw=open(L,_D)
-		for(dir,name)in list:jw.write(dir+D+name)
+		jw=open(Q,_D)
+		for(dir,name)in list:jw.write(dir+F+name)
 		jw.close()
 	def SavePersonalSetting():
 		try:
-			os.system(C+Directory+A);jw=open(M,_C);jjw=jw.readlines();jw.close();list=[]
+			os.system(C+Directory+B);jw=open(J,_C);jjw=jw.readlines();jw.close();list=[]
 			for x in jjw:
-				try:jx=x.split(D);newfile=jx[0];os.system('cp /etc/enigma2/'+newfile+' '+Directory+A);os.system(E+Directory+'/Settings/Temp/enigma2/*'+' '+Directory+A);list.append((newfile,jx[1]))
+				try:jx=x.split(F);newfile=jx[0];os.system('cp /etc/enigma2/'+newfile+' '+Directory+B);os.system(G+Directory+'/Settings/Temp/enigma2/*'+' '+Directory+B);list.append((newfile,jx[1]))
 				except:pass
-			for file in glob.glob('/etc/enigma2/userbouquet.jmx*.tv'):os.system('cp /etc/enigma2/subbouquet.jmx*.tv'+' '+Directory+A)
-			for file in glob.glob('/etc/enigma2/userbouquet.iptvdiv.tv'):os.system('cp /etc/enigma2/subbouquet.suls_iptv*.tv'+' '+Directory+A)
-			if os.path.exists('userbouquet.TerrestrialScan.tv'):os.system('cp /etc/enigma2/userbouquet.TerrestrialScan.tv'+' '+Directory+A)
+			for file in glob.glob('/etc/enigma2/userbouquet.jmx*.tv'):os.system('cp /etc/enigma2/subbouquet.jmx*.tv'+' '+Directory+B)
+			for file in glob.glob('/etc/enigma2/userbouquet.iptvdiv.tv'):os.system('cp /etc/enigma2/subbouquet.suls_iptv*.tv'+' '+Directory+B)
+			if os.path.exists('userbouquet.TerrestrialScan.tv'):os.system('cp /etc/enigma2/userbouquet.TerrestrialScan.tv'+' '+Directory+B)
 			SaveList(list)
 		except:return
 		return _B
 	def TransferPersonalSetting():
 		try:
-			jw=open(L,_C);jjw=jw.readlines();jw.close()
+			jw=open(Q,_C);jjw=jw.readlines();jw.close()
 			for x in jjw:
-				try:jx=x.split(D);newfile=jx[0];os.system(E+Directory+'/Settings/SelectFolder/*.tv'+' /etc/enigma2')
+				try:jx=x.split(F);newfile=jx[0];os.system(G+Directory+'/Settings/SelectFolder/*.tv'+' /etc/enigma2')
 				except:pass
 		except:pass
 		return _B
 	def CreateUserbouquetPersonalSetting():
-		C='" ORDER BY bouquet\n';A='#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "'
-		try:jw=open(M,_C);jjw=jw.readlines();jw.close()
+		B='" ORDER BY bouquet\n';A='#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "'
+		try:jw=open(J,_C);jjw=jw.readlines();jw.close()
 		except:pass
-		jRewriteBouquet=open(B,_C);RewriteBouquet=jRewriteBouquet.readlines();jRewriteBouquet.close();WriteBouquet=open(B,_D)
+		jRewriteBouquet=open(D,_C);RewriteBouquet=jRewriteBouquet.readlines();jRewriteBouquet.close();WriteBouquet=open(D,_D)
 		if int(Personal)==1:
-			Writebouquets=open(B,_D);Writebouquets.write(N);Writebouquets.close()
+			Writebouquets=open(D,_D);Writebouquets.write(R);Writebouquets.close()
 			for x in jjw:
 				try:
-					jx=x.split(D)
-					with open(B,'a')as f:f.write(A+jx[0].strip()+C)
+					jx=x.split(F)
+					with open(D,K)as f:f.write(A+jx[0].strip()+B)
 				except:pass
-			with open(B,'a')as f:f.write('#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "userbouquet.favourites.tv" ORDER BY bouquet\n')
+			with open(D,K)as f:f.write('#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "userbouquet.favourites.tv" ORDER BY bouquet\n')
 		else:
 			Counter=0
 			for xx in RewriteBouquet:
 				if Counter==1:
 					for x in jjw:
 						if x[0].strip()!='':
-							try:jx=x.split(D);WriteBouquet.write(A+jx[0].strip()+C)
+							try:jx=x.split(F);WriteBouquet.write(A+jx[0].strip()+B)
 							except:pass
 					WriteBouquet.write(xx)
 				else:WriteBouquet.write(xx)
 				Counter=Counter+1
 		WriteBouquet.close()
 	def TransferNewSetting():
-		M='/Settings/Temp/enigma2/satellites.xml /etc/tuxbox/';L='/Settings/Temp/enigma2/whitelist /etc/enigma2/';K='/etc/enigma2/whitelist';J='/Settings/Temp/enigma2/blacklist /etc/enigma2/';I='/etc/enigma2/blacklist';H='/Settings/Temp/enigma2/lamedb /etc/enigma2/';G='/Settings/Temp/enigma2/*.radio /etc/enigma2/';F='/etc/enigma2/userbouquet.favourites.tv';E='rm -rf /etc/enigma2/*.tv';D='rm -rf /etc/enigma2/*.radio';C='rm -rf /etc/enigma2/lamedb';A='cp -rf '
+		K='/Settings/Temp/enigma2/satellites.xml /etc/tuxbox/';J='/Settings/Temp/enigma2/whitelist /etc/enigma2/';I='/etc/enigma2/whitelist';H='/Settings/Temp/enigma2/blacklist /etc/enigma2/';G='/etc/enigma2/blacklist';F='/Settings/Temp/enigma2/*.radio /etc/enigma2/';E='/etc/enigma2/userbouquet.favourites.tv';C='rm -rf /etc/enigma2/*.tv';B='rm -rf /etc/enigma2/*.radio'
 		try:
 			if int(Personal)==1:
-				os.system(C);os.system(D);os.system(_J);os.system(E);WriteBouquet=open(B,_D);WriteBouquet.write(N);WriteBouquet.close()
-				if not os.path.exists(F):WriteFavorites=open(F,_D);WriteFavorites.write('#NAME @GioppyGio Favorites\n');WriteFavorites.close()
-				os.system(A+Directory+G);os.system(A+Directory+H)
+				os.system(B);os.system(_J);os.system(C);WriteBouquet=open(D,_D);WriteBouquet.write(R);WriteBouquet.close()
+				if not os.path.exists(E):WriteFavorites=open(E,_D);WriteFavorites.write('#NAME @GioppyGio Favorites\n');WriteFavorites.close()
+				os.system(A+Directory+F)
+				if not os.path.exists(G):os.system(A+Directory+H)
 				if not os.path.exists(I):os.system(A+Directory+J)
-				if not os.path.exists(K):os.system(A+Directory+L)
-				os.system(A+Directory+M)
+				os.system(A+Directory+K)
 			else:
-				os.system(C);os.system(D);os.system(E);os.system(_J);os.system(A+Directory+'/Settings/Temp/enigma2/*.tv /etc/enigma2/');os.system(A+Directory+G);os.system(A+Directory+H)
+				os.system('rm -rf /etc/enigma2/lamedb');os.system(B);os.system(C);os.system(_J);os.system(A+Directory+'/Settings/Temp/enigma2/*.tv /etc/enigma2/');os.system(A+Directory+F);os.system(A+Directory+'/Settings/Temp/enigma2/lamedb /etc/enigma2/')
+				if not os.path.exists(G):os.system(A+Directory+H)
 				if not os.path.exists(I):os.system(A+Directory+J)
-				if not os.path.exists(K):os.system(A+Directory+L)
-				os.system(A+Directory+M)
+				os.system(A+Directory+K)
 		except:return
 		return _B
 	Status=_B
-	if int(Type)==1:SavingProcessTerrestrialChannels=StartSavingTerrestrialChannels(G,_A);os.system('cp -r /etc/enigma2/ '+Directory+H)
-	if not DownloadSettingAgg(jLinkSat,jLinkDtt):os.system(E+Directory+O);os.system(F+Directory+H);Status=_A
+	if int(Type)==1:SavingProcessTerrestrialChannels=StartSavingTerrestrialChannels(E,_A);os.system('cp -r /etc/enigma2/ '+Directory+L)
+	if not DownloadSettingAgg(jLinkSat,jLinkDtt):os.system(G+Directory+S);os.system(H+Directory+L);Status=_A
 	else:
-		if int(Type)==0:SavingProcessTerrestrialChannels=StartSavingTerrestrialChannels(Directory+K,_B)
+		if int(Type)==0:SavingProcessTerrestrialChannels=StartSavingTerrestrialChannels(Directory+P,_B)
 		personalsetting=_A
 		if int(Personal)==1:personalsetting=SavePersonalSetting()
 		if TransferNewSetting():
 			if personalsetting:
-				if TransferPersonalSetting():CreateUserbouquetPersonalSetting();os.system(_I+Directory+A);os.system('mv /usr/lib/enigma2/python/Plugins/Extensions/GioppyGio/Moduli/Settings/SelectBack /usr/lib/enigma2/python/Plugins/Extensions/GioppyGio/Moduli/Settings/Select');os.system(F+Directory+H)
-		else:os.system(E+Directory+O);os.system(F+Directory+P);Status=_A
+				if TransferPersonalSetting():
+					CreateUserbouquetPersonalSetting()
+					with open(J,_C)as f:
+						if'userbouquet.TerrestrialScan.tv---—'in f.read():
+							os.system(C+Directory+'/Settings/Temp/enigma2/lamedb2');file_diff=open(Directory+M,_D);oldlines=set(open(Directory+I,_C))
+							for line in open(E,_C):
+								if line not in oldlines:file_diff.write(line)
+							FileNews=open(Directory+I,K);FileNewsDb=open(Directory+M,_C);FileNewsDb2=FileNewsDb.read();FileNewsDb.close();f1=open(E,_C);f2=open(Directory+M,_C);f1_data=f1.readlines();f2_data=f2.readlines();CheckFiles=_A
+							for line1 in f1_data:
+								for line2 in f2_data:
+									if line2 in line1:CheckFiles=_B
+							if CheckFiles==_A:FileNews.write(FileNewsDb2);FileNews.close();os.system(A+Directory+T)
+						else:os.system(A+Directory+T)
+					os.system(_I+Directory+B);os.system('mv /usr/lib/enigma2/python/Plugins/Extensions/GioppyGio/Moduli/Settings/SelectBack /usr/lib/enigma2/python/Plugins/Extensions/GioppyGio/Moduli/Settings/Select');os.system(H+Directory+L)
+		else:os.system(G+Directory+S);os.system(H+Directory+U);Status=_A
 		if SavingProcessTerrestrialChannels and Status:TransferBouquetTerrestrialFinal()
-	os.system(F+Directory+P);return Status
+	os.system(H+Directory+U);return Status
 class GioppyGioSettings:
 	def __init__(self,session=None):self.session=session;self.iTimer1=eTimer();self.iTimer2=eTimer();self.iTimer3=eTimer();self.iTimer1.callback.append(self.startTimerSetting);self.iTimer2.callback.append(self.startTimerSetting);self.iTimer3.callback.append(self.startTimerSetting)
 	def gotSession(self,session):

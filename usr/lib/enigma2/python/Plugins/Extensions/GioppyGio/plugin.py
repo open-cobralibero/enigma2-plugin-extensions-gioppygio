@@ -205,7 +205,7 @@ if os.path.exists(_Af)and os.path.exists(_Ae):
 					try:from Components.SystemInfo import BoxInfo;imageDev=' R'+BoxInfo.getItem('imagedevbuild');images_exec=str(image_exec)+imageDev
 					except Exception:pass
 				else:images_exec=str(image_exec)
-			elif mod_image==_AQ:images_exec='COBRALIBEROSAT TEAM'
+			elif mod_image==_AQ:images_exec='Cobralibero'
 def DownloadInfo(url):
 	try:
 		req=Request(url,_F,{_Ag:_Ah});context=ssl._create_unverified_context();response=urlopen(req,timeout=5,context=context)
@@ -568,6 +568,7 @@ class picons(Screen,ConfigListScreen):
 	def timershow(self):self.TimerShow=eTimer();self.TimerShow.callback.append(self.UpdatePicons);self.TimerShow.start(100,_A)
 	def passok(self):0
 	def piconsyesno(self):
+		if config.picongioppy.dtt.value==_B and config.picongioppy.sat_value.value==_B and config.picongioppy.main.value==_A:self.RestartGUI();return
 		if config.picongioppy.dtt.value==_B and config.picongioppy.sat_value.value==_B:self.session.open(MessageBox,_(_Av),MessageBox.TYPE_ERROR);return
 		if config.picongioppy.dtt.value==_A and config.picongioppy.sat_value.value==_A:msg=_('Do you want to install the picons\n\nModel: {}\nSatellites: {}\nDTT: {}\nDestination: {}\nResolution: {}').format(config.picongioppy.type.value.replace(_M,_(_Y)).replace(_U,_(_Z)),config.picongioppy.sat.value,config.picongioppy.dttmod.value.replace(_l,_(_AE)),config.picongioppy.dest.value.replace(_N,_e),config.picongioppy.dimens.value)
 		if config.picongioppy.dtt.value==_B and config.picongioppy.sat_value.value==_A:msg=_('Do you want to install the picons\n\nModel: {}\nSatellites: {}\nDestination: {}\nResolution: {}').format(config.picongioppy.type.value.replace(_M,_(_Y)).replace(_U,_(_Z)),config.picongioppy.sat.value,config.picongioppy.dest.value.replace(_N,_e),config.picongioppy.dimens.value)
@@ -770,6 +771,8 @@ config.plugins.TerrestrialScan.makexmlfile=ConfigYesNo(default=_A)
 config.plugins.TerrestrialScan.lcndescriptor=ConfigSelection(default=131,choices=[(131,'0x83'),(135,'0x87')])
 config.plugins.TerrestrialScan.channel_list_id=ConfigInteger(default=0,limits=(0,65535))
 config.plugins.TerrestrialScan.stabliseTime=ConfigSelection(default=2,choices=[(i,'%d'%i)for i in range(2,11)])
+ISO316677=[]
+def setISO316677(data):global ISO316677;ISO316677=data
 class DTTTerrestrialScan(ConfigListScreen,Screen):
 	def __init__(self,session):
 		if getDesktop(0).size().width()==1920:skin=skins+'DTTfhd.xml'
@@ -868,8 +871,15 @@ class DTTTerrestrialScan(ConfigListScreen,Screen):
 		default=NConfig in terrstrialNames and NConfig or _F;self.terrestrialRegions=ConfigSelection(default=default,choices=terrstrialNames);self.terrestrialRegionsEntry=getConfigListEntry(self.indent+_('Region'),self.terrestrialRegions,_("Select your region. If not available change 'Country' to 'all' and select one of the default alternatives."))
 	def countrycodeToCountry(self,cc):
 		if not hasattr(self,'countrycodes'):
-			self.countrycodes={};from Tools.CountryCodes import ISO3166
-			for country in ISO3166:self.countrycodes[country[2]]=country[0]
+			self.countrycodes={}
+			try:
+				from Tools.CountryCodes import ISO3166
+				for country in ISO3166:self.countrycodes[country[2]]=country[0]
+			except ImportError:
+				from Components.International import international;data=[]
+				for country in international.COUNTRY_DATA.keys():data.append((international.COUNTRY_DATA[country][international.COUNTRY_TRANSLATED],country,international.COUNTRY_DATA[country][international.COUNTRY_ALPHA3],international.COUNTRY_DATA[country][international.COUNTRY_NUMERIC],international.COUNTRY_DATA[country][international.COUNTRY_NAME]))
+				data.sort(key=lambda x:x[4]);setISO316677(data)
+				for country in ISO316677:self.countrycodes[country[2]]=country[0]
 		if cc.upper()in self.countrycodes:return self.countrycodes[cc.upper()]
 		return cc
 	def selectionChanged(self):
@@ -896,6 +906,7 @@ class DTTTerrestrialScan(ConfigListScreen,Screen):
 		else:self.cancelCallback(_A)
 	def keyLeft(self):ConfigListScreen.keyLeft(self);self.newConfig()
 	def keyRight(self):ConfigListScreen.keyRight(self);self.newConfig()
+	def keySelect(self):ConfigListScreen.keySelect(self);self.newConfig()
 	def newConfig(self):
 		cur=self[_S].getCurrent()
 		if len(cur)>1:

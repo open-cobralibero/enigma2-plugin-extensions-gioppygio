@@ -10,7 +10,7 @@ import os,sys,xml.etree.cElementTree
 from.Setting import*
 try:from io import BytesIO as By_tesIO
 except ImportError:from cStringIO import StringIO as By_tesIO
-version='11.8'
+version='11.9'
 UrlGitXml='https://raw.githubusercontent.com/GioppyGio/list-xml/main/new_set.xml'
 def OnclearMem():os.system('sync');os.system('echo 3 > /proc/sys/vm/drop_caches')
 Directory=os.path.dirname(sys.modules[__name__].__file__)
